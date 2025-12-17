@@ -6,11 +6,17 @@ RUN apt-get update && apt-get install -y \
     python3-colcon-common-extensions \
     ros-humble-rosbridge-server \
     ros-humble-image-transport-plugins \
+    python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /root/ros2_ws/src
 
+RUN pip3 install pi5neo
+
+RUN git clone https://github.com/Chandrahas-kasoju/body_bringup.git
+RUN git clone https://github.com/Chandrahas-kasoju/hospibot_led.git
 RUN git clone https://github.com/Chandrahas-kasoju/hospibot_teleop.git
+
 
 WORKDIR /root/ros2_ws
 

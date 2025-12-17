@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  hospibot_service:
+    build: .
+    container_name: hospibot_container
+    # Required for the robot to be accessible on the network
+    network_mode: host
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    # --- NEW SECTION: CAMERA ACCESS ---
+    devices:
+      - /dev/video0:/dev/video0
+      - /dev/spidev0.0:/dev/spidev0.0
+      - /dev/gpiomem:/dev/gpiomem
+      - /dev/mem:/dev/mem
+    # privileged mode helps with hardware access on Raspberry Pi
+    privileged: true
